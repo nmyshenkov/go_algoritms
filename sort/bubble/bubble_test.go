@@ -27,3 +27,12 @@ func Test_sort(t *testing.T) {
 		})
 	}
 }
+
+func Benchmark_sort(b *testing.B) {
+
+	data := []int{1, 31, 4, 6, 7, 4, 10, 12, 9}
+
+	for i := 0; i < b.N; i++ {
+		sort(data)
+	}
+}
