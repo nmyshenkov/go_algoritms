@@ -40,7 +40,6 @@ func choose(in []int) []int {
 
 	var (
 		min int
-		tmp int
 	)
 
 	for i := 0; i < len(in); i++ {
@@ -51,9 +50,8 @@ func choose(in []int) []int {
 				min = j
 			}
 		}
-		tmp = in[min]
-		in[min] = in[i]
-		in[i] = tmp
+
+		in[min], in[i] = in[i], in[min]
 	}
 
 	return in
