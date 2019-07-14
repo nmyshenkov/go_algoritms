@@ -39,6 +39,16 @@ func Test_insert(t *testing.T) {
 	}
 }
 
+func Test_choose(t *testing.T) {
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := choose(tt.args.in); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("choose() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 var benchData = []int{1, 31, 4, 6, 7, 4, 10, 12, 9}
 
 func Benchmark_bubble(b *testing.B) {
@@ -47,8 +57,14 @@ func Benchmark_bubble(b *testing.B) {
 	}
 }
 
-func Benchmark_sort(b *testing.B) {
+func Benchmark_insert(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		insert(benchData)
+	}
+}
+
+func Benchmark_choose(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		choose(benchData)
 	}
 }

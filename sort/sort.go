@@ -35,3 +35,26 @@ func insert(in []int) []int {
 
 	return in
 }
+
+func choose(in []int) []int {
+
+	var (
+		min int
+		tmp int
+	)
+
+	for i := 0; i < len(in); i++ {
+		min = i
+
+		for j := i + 1; j < len(in); j++ {
+			if in[j] < in[min] {
+				min = j
+			}
+		}
+		tmp = in[min]
+		in[min] = in[i]
+		in[i] = tmp
+	}
+
+	return in
+}
