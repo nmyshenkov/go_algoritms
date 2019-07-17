@@ -56,3 +56,30 @@ func choose(in []int) []int {
 
 	return in
 }
+
+func quick(in []int) []int {
+
+	if len(in) < 2 {
+		return in
+	}
+
+	l, r := 0, len(in)-1
+
+	o := (l + r) / 2
+
+	in[o], in[r] = in[r], in[o]
+
+	for i := range in {
+		if in[i] < in[r] {
+			in[l], in[i] = in[i], in[l]
+			l++
+		}
+	}
+
+	in[l], in[r] = in[r], in[l]
+
+	quick(in[:l])
+	quick(in[l+1:])
+
+	return in
+}
