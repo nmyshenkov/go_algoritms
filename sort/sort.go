@@ -83,3 +83,56 @@ func quick(in []int) []int {
 
 	return in
 }
+
+func merge(in []int) []int {
+
+	num := len(in)
+
+	if num == 1 {
+		return in
+	}
+
+	middle := int(num / 2)
+
+	var (
+		left  = make([]int, middle)
+		right = make([]int, num-middle)
+	)
+
+	for i := 0; i < num; i++ {
+		if i < middle {
+			left[i] = in[i]
+		} else {
+			right[i-middle] = in[i]
+		}
+	}
+
+	return m(merge(left), merge(right))
+}
+
+func m(left, right []int) (r []int) {
+	r = make([]int, len(left)+len(right))
+
+	i := 0
+	for len(left) > 0 && len(right) > 0 {
+		if left[0] < right[0] {
+			r[i] = left[0]
+			left = left[1:]
+		} else {
+			r[i] = right[0]
+			right = right[1:]
+		}
+		i++
+	}
+
+	for j := 0; j < len(left); j++ {
+		r[i] = left[j]
+		i++
+	}
+	for j := 0; j < len(right); j++ {
+		r[i] = right[j]
+		i++
+	}
+
+	return r
+}

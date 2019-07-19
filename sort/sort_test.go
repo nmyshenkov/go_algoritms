@@ -62,6 +62,16 @@ func Test_quick(t *testing.T) {
 	}
 }
 
+func Test_merge(t *testing.T) {
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := merge(tt.args.in); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("merge() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 //var benchData = []int{1, 31, 4, 6, 7, 4, 10, 12, 9}
 var benchData = []int{-317, -381, -14, -215, -590, -243, -412, 380, -312, 925, 158, -46, 177, 22, -482, 273, 217, 514, -392, 424}
 
@@ -86,5 +96,11 @@ func Benchmark_choose(b *testing.B) {
 func Benchmark_quick(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		quick(benchData)
+	}
+}
+
+func Benchmark_merge(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		merge(benchData)
 	}
 }
